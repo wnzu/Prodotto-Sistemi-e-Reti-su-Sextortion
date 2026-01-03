@@ -58,28 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Animazione statistiche
-   const statNumbers = document.querySelectorAll('.stat-number');
-statNumbers.forEach(stat => {
-    // Rimuove tutto tranne numeri e decimali
-    const finalNumber = Number(stat.textContent.replace(/[^\d.]/g, ''));
-    const hasPercent = stat.textContent.includes('%'); // verifica se c'è %
-    
-    if (!isNaN(finalNumber)) {
-        let current = 0;
-        const increment = finalNumber / 100;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= finalNumber) {
-                current = finalNumber;
-                clearInterval(timer);
-            }
-            // Aggiunge "%" se presente nell'originale
-            stat.textContent = Math.floor(current) + (hasPercent ? '%' : '');
-        }, 20);
-    }
-});
 
     
     // Alert di emergenza
@@ -153,4 +131,5 @@ statNumbers.forEach(stat => {
     });
 
 });
+
 
