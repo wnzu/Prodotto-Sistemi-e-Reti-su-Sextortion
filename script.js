@@ -60,9 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Animazione statistiche
-    const statNumbers = document.querySelectorAll('.stat-number');
+   const statNumbers = document.querySelectorAll('.stat-number');
 statNumbers.forEach(stat => {
-    const finalNumber = Number(stat.textContent);
+    // Rimuove tutto tranne numeri e decimali
+    const finalNumber = Number(stat.textContent.replace(/[^\d.]/g, ''));
+    const hasPercent = stat.textContent.includes('%'); // verifica se c'è %
+    
     if (!isNaN(finalNumber)) {
         let current = 0;
         const increment = finalNumber / 100;
@@ -72,11 +75,12 @@ statNumbers.forEach(stat => {
                 current = finalNumber;
                 clearInterval(timer);
             }
-            // Mostra numero con separatore delle migliaia
-            stat.textContent = Math.floor(current).toLocaleString('it-IT');
+            // Aggiunge "%" se presente nell'originale
+            stat.textContent = Math.floor(current) + (hasPercent ? '%' : '');
         }, 20);
     }
 });
+
     
     // Alert di emergenza
     const emergencyBtns = document.querySelectorAll('.emergency-btn');
@@ -149,3 +153,4 @@ statNumbers.forEach(stat => {
     });
 
 });
+
