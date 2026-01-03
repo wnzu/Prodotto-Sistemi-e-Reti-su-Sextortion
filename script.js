@@ -61,21 +61,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animazione statistiche
     const statNumbers = document.querySelectorAll('.stat-number');
-    statNumbers.forEach(stat => {
-        const finalNumber = parseInt(stat.textContent);
-        if (!isNaN(finalNumber)) {
-            let current = 0;
-            const increment = finalNumber / 100;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= finalNumber) {
-                    current = finalNumber;
-                    clearInterval(timer);
-                }
-                stat.textContent = Math.floor(current);
-            }, 20);
-        }
-    });
+statNumbers.forEach(stat => {
+    const finalNumber = Number(stat.textContent);
+    if (!isNaN(finalNumber)) {
+        let current = 0;
+        const increment = finalNumber / 100;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= finalNumber) {
+                current = finalNumber;
+                clearInterval(timer);
+            }
+            // Mostra numero con separatore delle migliaia
+            stat.textContent = Math.floor(current).toLocaleString('it-IT');
+        }, 20);
+    }
+});
     
     // Alert di emergenza
     const emergencyBtns = document.querySelectorAll('.emergency-btn');
@@ -146,4 +147,5 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
         });
     });
+
 });
